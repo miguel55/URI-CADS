@@ -884,9 +884,6 @@ class KidneyDataset(object):
         target["area1"] = area1
         target["area2"] = area2
         target["global_pat"] = global_pat
-
-#        target["area"] = area
-#        target["iscrowd"] = iscrowd
         
         img=F.to_tensor(img)
         img2=img.clone()
