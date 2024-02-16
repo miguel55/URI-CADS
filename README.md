@@ -13,7 +13,7 @@ This code is partly based on the Pytorch implementations of Faster R-CNN and Mas
 
 ## License
 
-URI-CADS code is released under the CC BY-NC 4.0 License (refer to the `LICENSE` and `COPYING` files for details).
+URI-CADS code is released under the CC BY-NC 4.0 License (refer to the `LICENSE` file for details).
 
 ## Citing URI-CADS
 
