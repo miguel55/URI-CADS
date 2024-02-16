@@ -78,15 +78,12 @@ def test_detection_model_full(model, dataloader, num_classes1, class_names1, num
     # Results 
     class_results_kidney = np.zeros((0,5),dtype='float')
     class_results_lesions = np.zeros((0,9),dtype='float')
-    class_results_global = np.zeros((0,num_classes2+1),dtype='float')
     class_results_final = np.zeros((0,num_classes2+1),dtype='float')
-    class_results_local = np.zeros((0,num_classes2+1),dtype='float')
     class_results_true = np.zeros((0,num_classes2+1),dtype='float')
 
     ious_kidney= np.zeros((0,1),dtype='float')
-    # Alpha/beta parameters
+    # Alpha parameter
     alpha=np.zeros((0,num_classes2),dtype='float')
-    beta=np.zeros((0,num_classes2),dtype='float')
     batch_counter = 0
     print('Evaluating...')
     with torch.no_grad():
@@ -232,21 +229,6 @@ def test_detection_model_full(model, dataloader, num_classes1, class_names1, num
                         ret_rel2[gt_labels2[j]-1]+=1
                         y_true2=np.concatenate((y_true2,gt_labels2[j][np.newaxis]),axis=0)
                         y_pred2=np.concatenate((y_pred2,pred_labels2[pos][np.newaxis]),axis=0)
-                        
-            # Save the images with detections and ground-truth objects in a new folder, to analyze the results
-            aux=paths[0].split('/')
-            folder_path=os.path.join(cfg.result_dir,'instances_pred_full')
-            if not os.path.exists(folder_path):
-                os.makedirs(folder_path)
-            img=np.array(F.to_pil_image(img_orig[0].cpu()))
-            for i in range(pred_boxes2.shape[0]):
-                cv2.rectangle(img, (pred_boxes2[i][0],pred_boxes2[i][1]), (pred_boxes2[i][2],pred_boxes2[i][3]),color=(255, 0, 0), thickness=1)
-                cv2.putText(img,pred_class2[i], (pred_boxes2[i][0],pred_boxes2[i][1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255),thickness=1)
-            for i in range(gt_boxes2.shape[0]):
-                cv2.rectangle(img, (gt_boxes2[i][0],gt_boxes2[i][1]), (gt_boxes2[i][2],gt_boxes2[i][3]),color=(0, 255, 0), thickness=1)
-                cv2.putText(img,class_names2[gt_labels2[i]], (gt_boxes2[i][0],gt_boxes2[i][1]), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255),thickness=1)
-            pred_path=folder_path+'/'+aux[-1]
-            cv2.imwrite(pred_path,cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
             
             # Save kidneys
             if (train_val_test=='train'):
@@ -347,16 +329,11 @@ def test_detection_model_full(model, dataloader, num_classes1, class_names1, num
             # Save global
             aux_res=np.zeros((1,num_classes2+1),dtype='float')
             aux_res[0,0]=batch_counter-1
-            aux_res[0,1:]=pred['global_logits'][0].cpu().numpy()[np.newaxis,:]
-            class_results_global=np.concatenate((class_results_global,aux_res),axis=0)
             aux_res[0,1:]=pred['final_logits'][0].cpu().numpy()[np.newaxis,:]
             class_results_final=np.concatenate((class_results_final,aux_res),axis=0)
-            aux_res[0,1:]=pred['local_logits'][0].cpu().numpy()[np.newaxis,:]
-            class_results_local=np.concatenate((class_results_local,aux_res),axis=0)
             aux_res[0,1:]=global_true[-1,:]
             class_results_true=np.concatenate((class_results_true,aux_res),axis=0)
             alpha=np.concatenate((alpha,pred['alpha'][0].detach().cpu()[np.newaxis,:]),axis=0)
-            beta=np.concatenate((beta,pred['beta'][0].detach().cpu()[np.newaxis,:]),axis=0)
             torch.cuda.empty_cache()
 
     # KIDNEYS
@@ -473,12 +450,9 @@ def test_detection_model_full(model, dataloader, num_classes1, class_names1, num
     # Save results
     sio.savemat(os.path.join(result_dir,'results_kidney'+str(fold)+'.mat'),{'results_kidney':class_results_kidney})
     sio.savemat(os.path.join(result_dir,'results_lesions'+str(fold)+'.mat'),{'results_lesions':class_results_lesions})
-    sio.savemat(os.path.join(result_dir,'results_global'+str(fold)+'.mat'),{'results_global':class_results_global})
     sio.savemat(os.path.join(result_dir,'results_final'+str(fold)+'.mat'),{'results_final':class_results_final})
-    sio.savemat(os.path.join(result_dir,'results_local'+str(fold)+'.mat'),{'results_local':class_results_local})
     sio.savemat(os.path.join(result_dir,'results_true'+str(fold)+'.mat'),{'results_true':class_results_true})
     sio.savemat(os.path.join(result_dir,'alpha'+str(fold)+'.mat'),{'alpha':alpha})
-    sio.savemat(os.path.join(result_dir,'beta'+str(fold)+'.mat'),{'beta':beta})
 
     return (precision_RPN1,recall_RPN1,f1_score_RPN1,cm_global1,prec_rec_global1,prec_rec_marginal1,
             precision_RPN2,recall_RPN2,f1_score_RPN2,cm_global2,prec_rec_global2,prec_rec_marginal2,

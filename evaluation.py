@@ -17,13 +17,10 @@ from sklearn.metrics import roc_auc_score, roc_curve
 # Results 
 results_kidney = np.zeros((0,5),dtype='float')
 results_lesions = np.zeros((0,9),dtype='float')
-results_global = np.zeros((0,cfg.num_classes2),dtype='float')
 results_final = np.zeros((0,cfg.num_classes2),dtype='float')
 results_true = np.zeros((0,cfg.num_classes2),dtype='float')
-results_local = np.zeros((0,cfg.num_classes2),dtype='float')
-# Alpha/beta parameters
+# Alpha parameter
 alpha=np.zeros((0,cfg.num_classes2),dtype='float')
-beta=np.zeros((0,cfg.num_classes2),dtype='float')
     
 for fold in cfg.folds:
     test=sio.loadmat(os.path.join(cfg.data_dir,'splits','idxTestM'+str(fold)+'.mat'))['idxTest'][0]
@@ -35,16 +32,11 @@ for fold in cfg.folds:
     aux=sio.loadmat(os.path.join(cfg.result_dir,'results_lesions'+str(fold)+'.mat'))['results_lesions']
     aux[:,0]=test[aux[:,0].astype('int')]
     results_lesions=np.concatenate((results_lesions,aux),axis=0)
-    aux=sio.loadmat(os.path.join(cfg.result_dir,'results_global'+str(fold)+'.mat'))['results_global']
-    results_global=np.concatenate((results_global,aux[:,1:]),axis=0)
     aux=sio.loadmat(os.path.join(cfg.result_dir,'results_final'+str(fold)+'.mat'))['results_final']
     results_final=np.concatenate((results_final,aux[:,1:]),axis=0)
-    aux=sio.loadmat(os.path.join(cfg.result_dir,'results_local'+str(fold)+'.mat'))['results_local']
-    results_local=np.concatenate((results_local,aux[:,1:]),axis=0)
     aux=sio.loadmat(os.path.join(cfg.result_dir,'results_true'+str(fold)+'.mat'))['results_true']
     results_true=np.concatenate((results_true,aux[:,1:]),axis=0)
     alpha=np.concatenate((alpha,sio.loadmat(os.path.join(cfg.result_dir,'alpha'+str(fold)+'.mat'))['alpha']),axis=0)
-    beta=np.concatenate((beta,sio.loadmat(os.path.join(cfg.result_dir,'beta'+str(fold)+'.mat'))['beta']),axis=0)
     
         
 # KIDNEYS
