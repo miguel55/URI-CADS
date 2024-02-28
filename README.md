@@ -6,7 +6,7 @@ This repository contains the code and documentation to implement URI-CADS (Ultra
 ```
 URI-CADS: a fully automated computer-aided diagnosis system for ultrasound renal imaging,
 Miguel Molina-Moreno, Iván González-Díaz, Maite Rivera Gorrín, Víctor Burguera Vion, Fernando Díaz-de-María
-Journal of Imaging Informatics in Medicine, VOL, DOI, 2024. 
+Journal of Imaging Informatics in Medicine, doi: https://doi.org/10.1007/s10278-024-01055-4, 2024. 
 ```
 
 This code is partly based on the Pytorch implementations of Faster R-CNN and Mask R-CNN and developed in Pytorch.
@@ -22,11 +22,10 @@ If you find URI-CADS useful in your research, please consider citing:
 	@ARTICLE{uricads,
 		title = {URI-CADS: a fully automated computer-aided diagnosis system for ultrasound renal imaging},
 		journal = {Journal of Imaging Informatics in Medicine},
-		volume = {XX},
-		pages = {XX},
+		volume = {},
+		pages = {},
 		year = {2024},
-		doi = {DOI},
-		url = {URL},
+		doi = {https://doi.org/10.1007/s10278-024-01055-4},
 		author = {Miguel Molina-Moreno and Iván González-Díaz and Maite Rivera Gorrín and Víctor Burguera Vion and Fernando Díaz-de-María}
 	}
   
