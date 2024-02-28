@@ -30,12 +30,16 @@ If you find URI-CADS useful in your research, please consider citing:
 		author = {Miguel Molina-Moreno and Iván González-Díaz and Maite Rivera Gorrín and Víctor Burguera Vion and Fernando Díaz-de-María}
 	}
   
+## Dataset and models
+
+Coming soon
+[comment]: <Download the models and database, available under request in , and uncompress them in models/ and bbdd/ directories.>
 
 ## Requirements
 
 URI-CADS is implemented to not require any additional modules. The Python code has been tested with Pytorch 1.3.1, a modified version of the torchvision library released with the code and CUDA 10.1.
 
-Before executing the Python code, it is necessary to uncompress the torchvision_05.zip file and download the models and database, available under request in XXX, and uncompress them in models/ and bbdd/ directories.
+Before executing the Python code, it is necessary to uncompress the torchvision_05.zip file.
 
 ## Demo
 
