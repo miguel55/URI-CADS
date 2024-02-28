@@ -33,7 +33,7 @@ If you find URI-CADS useful in your research, please consider citing:
 ## Dataset and models
 
 Coming soon
-[comment]: <Download the models and database, available under request in , and uncompress them in models/ and bbdd/ directories.>
+Download the models and database, available under request in [not available yet], and uncompress them in models/ and bbdd/ directories.
 
 ## Requirements
 
