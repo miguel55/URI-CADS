@@ -31,9 +31,7 @@ If you find URI-CADS useful in your research, please consider citing:
   
 ## Dataset and models
 
-Coming soon
-
-Download the models and database, available under request in [not available yet], and uncompress them in models/ and bbdd/ directories.
+Download the models and database, available under request in [https://doi.org/10.21950/0E0CTF](https://doi.org/10.21950/0E0CTF), and uncompress them in models/ and bbdd/ directories.
 
 ## Requirements
 
