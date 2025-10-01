@@ -48,16 +48,16 @@ To test our approach with the provided database and models, follow the steps bel
 
 The reported performance for each class (global and local pathologies) with our benchmark is presented below:
 
-| Class (pathology)                      |  AUC_{SP-SENS} (%)  |   SP_{SENS95} (%)  |
-|----------------------------------------|---------------------|--------------------|
-| Healthy                                |        87.41        |        60.59       |
-| Cyst*                                  |        79.59        |        28.19       |
-| Pyramid*                               |        86.61        |        48.19       |
-| Hydronephrosis*                        |        93.04        |        63.19       |
-| Others*                                |        69.32        |        14.05       |
-| Poor corticomedullary differentiation* |        78.65        |        29.28       |
-| Hyperecogenia*                         |        84.15        |        43.63       |
-| Multi-pathological (average*)          |        81.90        |        37.76       |
+| Class (pathology)                         |  AUC_{SP-SENS} (%)  |   SP_{SENS95} (%)  |
+|-------------------------------------------|---------------------|--------------------|
+| **Healthy**                               |        87.41        |        60.59       |
+| **Cyst**                                  |        79.59        |        28.19       |
+| **Pyramid**                               |        86.61        |        48.19       |
+| **Hydronephrosis**                        |        93.04        |        63.19       |
+| **Others**                                |        69.32        |        14.05       |
+| **Poor corticomedullary differentiation** |        78.65        |        29.28       |
+| **Hyperecogenia**                         |        84.15        |        43.63       |
+| **Multi-pathological (average)**          |        81.90        |        37.76       |
 
 ## Installation
 
